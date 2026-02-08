@@ -261,3 +261,100 @@ Build all of the above with a polished, enterprise dashboard look suitable for a
 (27997 more lines)
 
 The evaluation metric for this contest is the categorization accuracy, or the proportion of test images that are correctly classified. For example, a categorization accuracy of 0.97 indicates that you have correctly classified all but 3% of the images.
+
+
+updated : 
+
+You are updating the previously generated “Lovable” Dynamic Pricing Dashboard prototype. Apply the changes below as a single delta. Keep the existing layout, interactions, and styling unless explicitly changed.
+
+1) AUTHENTICATION (LOGIN)
+- Add a Login page with fields: Username, Password, and Role (fixed: “Pricing Manager”).
+- Accept any username/password (prototype mode) and proceed to the dashboard.
+
+2) BRAND & NAMEPLATES: STELLANTIS → TOYOTA
+- Replace all Stellantis/Jeep references with Toyota across the entire prototype (labels, filters, charts, tables, tooltips, defaults).
+- Example: “Jeep Gladiator” → “Toyota Tacoma”.
+- Ensure other Toyota models are used where relevant (e.g., Corolla, Camry, RAV4, Highlander, 4Runner, Sequoia, Tundra, Sienna, Prius, GR86).
+
+3) SOLUTION OVERVIEW – BIG KPI RANGES (AS SPECIFIED)
+- Expected Profit Uplift % → show range “2–5%”
+- Market Share Uplift % → show range “18–20%”
+- Price Consolidation % → show range “80–90%”
+- Override Rate (target) → keep as currently implemented (no change)
+- Each KPI range displays as text and a compact horizontal range bar with caption “Target Range”.
+
+4) DATA SOURCES – RENAME ONLY
+Across the entire prototype, update ALL data source names while preserving
+their original source types and structures.
+
+Rules:
+- Keep the source type unchanged (SQL stays SQL, CSV stays CSV, API stays API, etc.).
+- Modify ONLY the data source name/label.
+- Do NOT change schemas, joins, fields, refresh cadence, logic, or behavior.
+- Apply consistently across:
+  - Portfolio Overview
+  - Solution Overview
+  - AI/ML Modelling
+  - Tradeoff
+  - Override
+  - Feedback Loop
+  - Explainable AI (LIME / SHAP)
+  - US Map
+  - Filters, tooltips, metadata panels, lineage views
+
+Naming convention:
+- Use Toyota US–aligned, business‑meaningful names.
+
+Examples (illustrative only):
+- toyota_us_sales_fact
+- toyota_lease_pricing_features
+- toyota_market_share_model_output
+- toyota_pricing_feature_store
+- toyota_override_feedback_log
+- toyota_tradeoff_optimization_output
+- toyota_us_state_performance
+
+This is a semantic rename only — functionality must remain unchanged.
+
+
+5) FEEDBACK LOOP
+- Add a “Feedback Loop” sub-tab under AI/ML Modelling AND a Feedback Loop section after the Override sub-tab.
+- On price overrides, capture: model_id, model_version, datetime, user, old_price, new_price, reason_code, expected_uplift; later attach actuals (sales, share, profit) when available.
+- Maintain a Training Buffer table with statuses (Staged → Approved → In Model). Include controls to approve for retraining and trigger retrain (sandbox), and version increment on success. Show basic data quality checks (missingness/outliers/drift) and an audit trail.
+
+6) EXPLAINABLE AI
+- After the Feedback Loop tab, add an “Explainable AI” tab:
+  - LIME for local explanations (top positive/negative feature contributions).
+  - SHAP values for global importance (summary/beeswarm or bar).
+
+7) AI/ML MODELLING → TRADEOFF SUB-TAB
+- Add a “Tradeoff” sub-tab with the objective:
+  Tradeoff = α × normalized_share + β × normalized_profit
+  Where α = weight of share, β = weight of profit.
+- α and β are user inputs (defaults: α = 0.515, β = 0.485). Make both dynamically adjustable in the UI.
+- Normalize share and profit within the current price grid (use min–max normalization).
+- Compute and display the Optimal Tradeoff Price, along with the maximized tradeoff score and the expected profit and share at that price. Include a chart of Price vs Tradeoff score and highlight the optimum.
+
+8) US TOYOTA LEASE PRICE BOUNDS
+- For US Toyota lease scenarios, constrain/default the lease price range to $700–$800 (use slider/validation accordingly). Use this range for the Tradeoff price grid when is_lease is true.
+
+9) DEFAULT CURRENCY
+- Set default currency and formatting to US Dollar ($) across the entire prototype.
+
+10) PORTFOLIO OVERVIEW – DYNAMIC US MAP
+- Replace “Regional Performance” with an interactive US state-level map.
+- On hover, show: Sales, Average Lease Price, Avg Profit, Avg Share per state.
+- The map must be filterable by existing slicers and support drill-through to details.
+
+ACCEPTANCE (MUST PASS):
+- Login accepts any credentials, shows Role = Pricing Manager, and routes to the dashboard.
+- All Stellantis/Jeep references replaced with Toyota (e.g., Jeep Gladiator → Toyota Tacoma).
+- Solution Overview KPIs display the specified ranges; Override Rate remains unchanged.
+- All data sources renamed consistently; source types and data behavior unchanged.
+- Feedback Loop present under AI/ML Modelling and after Override, with approve/retrain/versioning and audit trail.
+- Explainable AI tab shows LIME (local) and SHAP (global) explanations.
+- Tradeoff tab implements the given equation with dynamic α, β (defaults provided) and outputs an optimal price.
+- US Toyota lease price flows are bounded/defaulted to $700–$800.
+- Default currency is US $ across all tabs.
+- Portfolio Overview shows a dynamic US map with the required hover metrics.
+
